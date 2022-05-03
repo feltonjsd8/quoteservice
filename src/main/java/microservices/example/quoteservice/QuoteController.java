@@ -13,7 +13,7 @@ import java.util.*;
 public class QuoteController {
     private List<Quote> quoteList = new ArrayList<> (Arrays.asList(new Quote(1, "John", "my first quote"),
             new Quote(2, "Davitt" ,"Azure is easy!"),
-            new Quote(3, "Charlie" ,"Polaris from the ground up")));
+            new Quote(3, "Charlie" ,"Microservices are cool!")));
 
     //@HystrixCommand(fallbackMethod = "quotesFallback")
     @GetMapping("/quotes")
