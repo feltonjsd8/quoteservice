@@ -1,0 +1,28 @@
+name: AzureSpringCloud
+on: push
+env:
+  ASC_PACKAGE_PATH: ${{ github.workspace }}
+  AZURE_SUBSCRIPTION: 030daed3-1d45-4d2b-9863-451b9ebb0a95
+
+jobs:
+  deploy_to_production:
+    runs-on: ubuntu-latest
+    name: deploy to production with soruce code
+    steps:
+      - name: Checkout Github Action
+        uses: actions/checkout@v2
+
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: deploy to production step with soruce code
+        uses: azure/spring-cloud-deploy@v1
+        with:
+          azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
+          action: deploy
+          service-name: polaris-ms-test
+          app-name: quoteservice
+          use-staging-deployment: false
+          package: ${{ env.ASC_PACKAGE_PATH }}
